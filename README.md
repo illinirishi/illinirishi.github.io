@@ -57,6 +57,3 @@ Other References:
 How to Slideshow Gallery: https://www.w3schools.com/howto/howto_js_slideshow_gallery.asp
 HTML Styles - CSS: https://www.w3schools.com/html/html_css.asp
 Hosted Library: https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js
-
-
-
