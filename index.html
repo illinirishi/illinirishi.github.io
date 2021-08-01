@@ -96,7 +96,7 @@
 	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
 
 	// Get the data
-	d3.csv("https://flunky.github.io/cars2017.csv", function(error, data){
+	d3.csv("cars2017.csv", function(error, data){
 	  if (error) throw error;
 	  data.forEach(function(d) {
 	    d.AverageHighwayMPG = +d.AverageHighwayMPG;
