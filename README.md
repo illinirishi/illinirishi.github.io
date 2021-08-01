@@ -1,7 +1,7 @@
 CS 416 Data Visualization- Essay describing the Narrative Visualization
 By Rishikesh R. Pagnis; rpagnis2 Summer 2021
 
-View visualization by clicking here (https://illinirishi.github.io/) : Final Project for CS 416 - Compare Fuel Economy measured in Miles per Gallon(MPG)in the City vs on the Highway using a scatter plot. Do number of Cylinders matter? How about Electric Cars with no cylinders?
+You can view the visualization by clicking here (https://illinirishi.github.io/) : Final Project for CS 416 - Compare Fuel Economy measured in Miles per Gallon(MPG)in the City vs on the Highway using a scatter plot. Do number of Cylinders matter? How about Electric Cars with no cylinders?
 
 About the Visualization
 The chosen narative visualization is an Interactive Slideshow. It consists of 3 slides(as Scenes) where the reader has the ability to look at the full dataset as well as highlight data based on a categorical(Engine Cylinders)variable.
