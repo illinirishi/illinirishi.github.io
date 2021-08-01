@@ -4,7 +4,7 @@ By Rishikesh R. Pagnis; rpagnis2 Summer 2021
 You can view the visualization by clicking here (https://illinirishi.github.io/) : Final Project for CS 416 - Compare Fuel Economy measured in Miles per Gallon(MPG)in the City vs on the Highway using a scatter plot. Do number of Cylinders matter? How about Electric Cars with no cylinders?
 
 About the Visualization
-The chosen narative visualization is an Interactive Slideshow. It consists of 3 slides(as Scenes) where the reader has the ability to look at the full dataset as well as highlight data based on a categorical(Engine Cylinders)variable.
+The chosen narrative visualization is an Interactive Slideshow. It consists of 3 slides(as Scenes) where the reader has the ability to look at the full dataset as well as highlight data based on a categorical(Engine Cylinders)variable.
 
 The visualization is based on a dataset from a course assignment for scatter plots... https://flunky.github.io/cars2017.csv. The attributes in this dataset are Make(Make of Vehicle), Fuel(Type of Fuel),EngineCylinders(Number of Cylinders in an Engine), AverageHighwayMPG, AverageCityMPG of 146 vehicles from the year 2017.
 
