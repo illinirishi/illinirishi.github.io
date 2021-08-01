@@ -38,7 +38,6 @@ Triggers are also utilized with the data points.
 The user event of "mouse over" a data point changes the current state of the chart by applying an opacity of 0.01 to all data not part of the vehicle type that is currently moused over. The user event of "mouse off" changes the current state of the chart by returning the opacity of all data points back to 1. This capability for the user event associated with data mouse over is communicated with an annotation.
 
 References used:
-
 D3 Scatter plot example used as reference: https://devdocs.io/d3~3/
 Tutorial for building a stepper page used as reference: http://vallandingham.me/stepper_steps.html
 Building Legends in d3.js https://www.d3-graph-gallery.com/graph/custom_legend.html
