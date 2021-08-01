@@ -1,0 +1,192 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <title>Final Project for CS 416 - Data Visualization</title>
+  <meta name="author" content="Rishikesh Pagnis">
+  <meta name="description" content="">
+
+  <link rel="stylesheet" href="src/reset.css">
+  <link rel="stylesheet" href="src/stepper.css">
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+
+  <script src="src/stepper.js"></script>
+  <script src="http://d3js.org/d3.v3.min.js"></script>
+</head>
+<body>
+  <div id="container">
+    <h1>Compare Fuel Economy measured in Miles per Gallon(MPG)in the City vs on the Highway using a scatter plot. Do number of Cylinders matter? How about Electric Cars with no cylinders?</h1>
+    <h2 class="subtitle">Visualization is based on data from the class assignment 8-2-6, cars2017.csv that contains average data for 2017 automobile manufacturers.</h2>
+    <div id="vis-nav">
+      <a href="#" id="step1" class="step-link active">Scene 1</a>
+      <a href="#" id="step2" class="step-link">Scene 2</a>
+      <a href="#" id="step3" class="step-link">Scene 3</a>
+      <a href="README.md" target="_blank" class="desc-link">About the Visualization</a>
+
+    </div>
+    <div id="vis-container">
+      <div id="annotation-steps">
+        <div class="annotation-step" id="step1-annotation" style="display:block;">
+          <div class="annotation" id="step1-high-annotation" >
+            <h4>As number of cylinders increases, fuel economy decreases for all vehicle types except Electric Vehicles. The Legend for number of Engine Cylinders is on the right. </h4>
+                		  
+          </div>
+         </div>
+        <div class="annotation-step" id="step2-annotation">
+          <div class="annotation" id="step2-high-annotation" >
+	    <h4>Mouseover the data to see the individual trends for different vehicles based on the number of Engine Cylinders. The Legend for number of Engine Cylinders is on the right.</h4>
+				
+          </div>
+        </div>
+	<div class="annotation-step" id="step3-annotation">
+          <div class="annotation" id="step3-high-annotation" >
+	    <h4>If you notice the fuel economy for Electic Vehicles with no cylinders is the maximum. Based on the findings your the next vehicle you buy should preferably be an electric vehicle!</h4>
+		
+          </div>
+        </div>
+      </div>
+     <div id="vis-canvas"> 
+	     
+    <style>
+
+	.axis path,
+	.axis line {
+	  fill: none;
+	  stroke: #000;
+	  shape-rendering: crispEdges;
+	}
+
+	.dot {
+	  stroke: #000;
+	}
+
+	</style>
+
+	<script>
+
+	// Set the dimensions of the canvas / graph
+	var margin = {top: 50, right: 20, bottom: 20, left: 80},
+	    width = 940 - margin.left - margin.right,
+	    height = 500 - margin.top - margin.bottom;
+
+	// Set the ranges
+	var x = d3.scale.linear()
+		.domain([0, 140])
+	    .range([0, width]);
+	var y = d3.scale.linear()
+	    .domain([0, 140])
+	    .range([height, 0]);
+		
+	var color = d3.scale.category10();
+
+	// Define the axes
+	var xAxis = d3.svg.axis()
+	    .scale(x)
+	    .orient("bottom");
+
+	var yAxis = d3.svg.axis()
+	    .scale(y)
+	    .orient("left");
+
+	// Add the svg canvas
+	var svg = d3.select("#vis-canvas").append("svg")
+	    .attr("width", width + margin.left + margin.right)
+	    .attr("height", height + margin.top + margin.bottom)
+	  .append("g")
+	    .attr("transform", "translate(" + margin.left + "," + margin.top + ")");
+
+	// Get the data
+	d3.csv("https://flunky.github.io/cars2017.csv", function(error, data){
+	  if (error) throw error;
+	  data.forEach(function(d) {
+	    d.AverageHighwayMPG = +d.AverageHighwayMPG;
+	    d.AverageCityMPG = +d.AverageCityMPG;
+		d.EngineCylinders = +d.EngineCylinders;
+		
+	  });
+
+	// Scale the range of the data
+	  x.domain(d3.extent(data, function(d) { return d.AverageCityMPG; })).nice();
+	  y.domain(d3.extent(data, function(d) { return d.AverageHighwayMPG; })).nice();
+	  	  
+	  
+	// Add the X Axis
+	  svg.append("g")
+	      .attr("class", "x axis")
+	      .attr("transform", "translate(0," + height + ")")
+	      .call(xAxis)
+	    .append("text")
+	      .attr("class", "label")
+	      .attr("x", width)
+	      .attr("y", 0)
+	      .style("text-anchor", "end")
+	      .text("Average Highway Miles per Gallon");
+
+	// Add the Y Axis
+	  svg.append("g")
+	      .attr("class", "y axis")
+	      .call(yAxis)
+	    .append("text")
+	      .attr("class", "label")
+	      .attr("transform", "rotate(-90)")
+	      .attr("y", 0)
+	      .attr("dy", ".71em")
+	      .style("text-anchor", "end")
+	      .text("Average City Miles per Gallon")
+
+	// Add the Scatterplot
+	  svg.selectAll(".dot")
+	      .data(data)
+		  .enter().append("circle")
+	      .attr("class", "dot")
+	      .attr("r", 7)
+	      .attr("cx", function(d) { return x(d.AverageHighwayMPG); })
+	      .attr("cy", function(d) { return y(d.AverageCityMPG); })
+	      .style("fill", function(d) { return color(d.EngineCylinders); })
+	      .on("mouseover", function(d){
+        	  d3.selectAll('.dot')
+            	   .filter(function(dot){ 
+                    return (dot.EngineCylinders != d.EngineCylinders) 
+                   })
+                   .transition()
+                   .style("opacity", 0.01)
+          })
+              .on("mouseout", function(d){
+               d3.selectAll('.dot')
+                .filter(function(dot){ 
+                 return (dot.EngineCylinders != d.EngineCylinders) 
+                })
+                .transition()
+                .style("opacity", 1)
+          });
+
+	// Add the Legend
+	
+	
+	  var legend = svg.selectAll(".legend")
+	      .data(color.domain())
+	    .enter().append("g")
+	      .attr("class", "legend")
+	      .attr("transform", function(d, i) { return "translate(0," + i * 20 + ")"; });
+
+	  legend.append("rect")
+	      .attr("x", width - 18)
+	      .attr("width", 18)
+	      .attr("height", 18)
+	      .style("fill", color);
+
+	  legend.append("text")
+	      .attr("x", width - 24)
+	      .attr("y", 9)
+	      .attr("dy", ".35em")
+	      .style("text-anchor", "end")
+	      .text(function(d) { return d; });
+
+	});
+
+	</script>
+     </div>
+    </div>
+  </div>
+</body>
+</html>
